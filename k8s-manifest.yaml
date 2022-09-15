@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fastapi
+  name: fastapi
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - args:
+        - uvicorn
+        - --reload
+        - --host
+        - 0.0.0.0
+        - src.fastapi_demo.fastapi_demo:app
+        - --port
+        - "8081"
+        command:
+        - python
+        - -m
+        image: docker.io/devopstw22/fastapi_demo
+        name: fastapi
+        resources:
+          requests:
+            cpu: 250m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+    networking.gke.io/load-balancer-type: Internal
+  name: fastapi
+  namespace: default
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: fastapi
+  type: LoadBalancer

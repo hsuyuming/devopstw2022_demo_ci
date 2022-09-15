@@ -1,0 +1,246 @@
+(base) jupyter@abehsu-devops-demo:~/devopstw2022_demo$ skaffold render  -p docker_with_kubectl_artifactory -v debug --digest-source=local
+DEBU[0000] skaffold API not starting as it's not requested  subtask=-1 task=DevLoop
+INFO[0000] Skaffold &{Version:v1.39.2 ConfigVersion:skaffold/v2beta29 GitVersion: GitCommit:7ed1d722b53b55ac1c909f00d00a05b47d0964dd BuildDate:2022-08-16T14:29:11Z GoVersion:go1.17 Compiler:gc Platform:linux/amd64 User:}  subtask=-1 task=DevLoop
+DEBU[0000] Disable housekeeping messages for command explicitly  subtask=-1 task=DevLoop
+DEBU[0000] config version out of date: upgrading to latest "skaffold/v2beta29"  subtask=-1 task=DevLoop
+DEBU[0000] parsed 1 configs from configuration file /home/jupyter/devopstw2022_demo/skaffold.yaml  subtask=-1 task=DevLoop
+INFO[0000] applying profile: docker_with_kubectl_artifactory  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Build  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field artifacts  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field insecureRegistries  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field tagPolicy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field platforms  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field BuildType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Test   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Deploy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field DeployType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field docker  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field helm   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kpt    subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubectl  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kustomize  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheck  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheckDeadlineSeconds  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubeContext  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field logs   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field prefix  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field jsonParse  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field fields  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field PortForward  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field ResourceSelector  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field allow  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field deny   subtask=-1 task=DevLoop
+INFO[0000] no map entry found when attempting locate for &{docker.io/devopstw22/fastapi_demo fastapi_demo <nil> {0xc00099c630 <nil> <nil> <nil> <nil> <nil> <nil>} [] {[] []} []} of type *latest.Artifact and pointer: 824634741632  subtask=-1 task=DevLoop
+INFO[0000] Using kubectl context: minikube               subtask=-1 task=DevLoop
+INFO[0000] Loaded Skaffold defaults from "/home/jupyter/.skaffold/config"  subtask=-1 task=DevLoop
+DEBU[0000] getting client config for kubeContext: `minikube`  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [minikube version --output=json]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [{"commit":"62e108c3dfdec8029a890ad6d8ef96b6461426dc","minikubeVersion":"v1.26.1"}
+]  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [/home/jupyter/.cache/cloud-code/installer/google-cloud-sdk/bin/minikube docker-env --shell none -p minikube --user=skaffold]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [DOCKER_TLS_VERIFY=1
+DOCKER_HOST=tcp://192.168.49.2:2376
+DOCKER_CERT_PATH=/home/jupyter/.minikube/certs
+MINIKUBE_ACTIVE_DOCKERD=minikube
+]  subtask=-1 task=DevLoop
+DEBU[0001] setting Docker user agent to skaffold-v1.39.2  subtask=-1 task=DevLoop
+INFO[0001] Using minikube docker daemon at tcp://192.168.49.2:2376  subtask=-1 task=DevLoop
+DEBU[0001] CLI platforms provided: ""                    subtask=-1 task=DevLoop
+DEBU[0001] platforms detected from active kubernetes cluster nodes: ""  subtask=-1 task=DevLoop
+DEBU[0001] platforms selected for artifact "docker.io/devopstw22/fastapi_demo": ""  subtask=-1 task=DevLoop
+DEBU[0001] Using builder: local                          subtask=-1 task=DevLoop
+INFO[0001] build concurrency first set to 1 parsed from *local.Builder[0]  subtask=-1 task=DevLoop
+INFO[0001] final build concurrency value is 1            subtask=-1 task=DevLoop
+DEBU[0001] Running command: [git rev-list -1 HEAD]       subtask=-1 task=Build
+DEBU[0001] Command output: [2b10162c3773d41385524d0a95b632d552fb8370
+]  subtask=-1 task=Build
+DEBU[0001] Running command: [git status . --porcelain]   subtask=-1 task=Build
+DEBU[0001] Command output: [ D fastapi_demo/kubernetest_manifests/deployment.yaml
+ D fastapi_demo/kubernetest_manifests/service.yaml
+ M fastapi_demo/poetry.lock
+ M fastapi_demo/pyproject.toml
+ M fastapi_demo/src/fastapi_demo/__init__.py
+ M fastapi_demo/src/fastapi_demo/fastapi_demo.py
+ M fastapi_demo/tests/test_fastapi_demo.py
+?? fastapi_demo/kubernetest_manifests_artifactory/
+?? fastapi_demo/kubernetest_manifests_local/
+?? fastapi_demo/src/.scannerwork/
+?? fastapi_demo/src/__init__.py
+?? fastapi_demo/tests/__init__.py
+]  subtask=-1 task=Build
+INFO[0001] Tags generated in 7.214032ms                  subtask=-1 task=Build
+DEBU[0001] Found dependencies for dockerfile: [{pyproject.toml /code true 5 5} {poetry.lock /code true 5 5} {. /code false 17 17}]  subtask=-1 task=DevLoop
+DEBU[0001] Could not import artifact from Docker, building instead (import of missing images disabled)  subtask=-1 task=Build
+INFO[0001] Cache check completed in 56.764093ms          subtask=-1 task=Build
+DEBU[0001] Running docker build: context: fastapi_demo, dockerfile: Dockerfile  subtask=docker.io/devopstw22/fastapi_demo task=Build
+INFO[0021] Build completed in 20.688 seconds             subtask=-1 task=Build
+DEBU[0021] Running command: [kubectl version --client -ojson]  subtask=-1 task=DevLoop
+DEBU[0021] Command output: [{
+  "clientVersion": {
+    "major": "1",
+    "minor": "22+",
+    "gitVersion": "v1.22.12-dispatcher-dirty",
+    "gitCommit": "fde00375407ad0afadd681a3505054ec83f935ec",
+    "gitTreeState": "dirty",
+    "buildDate": "2022-07-19T19:01:51Z",
+    "goVersion": "go1.16.15",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+  }
+}
+]  subtask=-1 task=DevLoop
+DEBU[0021] Running command: [kubectl --context minikube create --dry-run=client -oyaml -f /home/jupyter/devopstw2022_demo/fastapi_demo/kubernetest_manifests_artifactory/deployment.yaml -f /home/jupyter/devopstw2022_demo/fastapi_demo/kubernetest_manifests_artifactory/service.yaml]  subtask=-1 task=DevLoop
+DEBU[0022] Command output: [apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fastapi
+  name: fastapi
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - args:
+        - uvicorn
+        - --reload
+        - --host
+        - 0.0.0.0
+        - src.fastapi_demo.fastapi_demo:app
+        - --port
+        - "8081"
+        command:
+        - python
+        - -m
+        image: docker.io/devopstw22/fastapi_demo
+        name: fastapi
+        resources:
+          requests:
+            cpu: 250m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+    networking.gke.io/load-balancer-type: Internal
+  name: fastapi
+  namespace: default
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: fastapi
+  type: LoadBalancer
+]  subtask=-1 task=DevLoop
+DEBU[0022] manifests with tagged images:apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fastapi
+  name: fastapi
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - args:
+        - uvicorn
+        - --reload
+        - --host
+        - 0.0.0.0
+        - src.fastapi_demo.fastapi_demo:app
+        - --port
+        - "8081"
+        command:
+        - python
+        - -m
+        image: docker.io/devopstw22/fastapi_demo:2b10162c3773d41385524d0a95b632d552fb8370-dirty@sha256:8dda9fd1344ad5f14e4a8cdd79e6c668d551e831edc6a38c4b67a088db5072d6
+        name: fastapi
+        resources:
+          requests:
+            cpu: 250m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+    networking.gke.io/load-balancer-type: Internal
+  name: fastapi
+  namespace: default
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: fastapi
+  type: LoadBalancer  subtask=-1 task=DevLoop
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fastapi
+  name: fastapi
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - args:
+        - uvicorn
+        - --reload
+        - --host
+        - 0.0.0.0
+        - src.fastapi_demo.fastapi_demo:app
+        - --port
+        - "8081"
+        command:
+        - python
+        - -m
+        image: docker.io/devopstw22/fastapi_demo:2b10162c3773d41385524d0a95b632d552fb8370-dirty@sha256:8dda9fd1344ad5f14e4a8cdd79e6c668d551e831edc6a38c4b67a088db5072d6
+        name: fastapi
+        resources:
+          requests:
+            cpu: 250m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+    networking.gke.io/load-balancer-type: Internal
+  name: fastapi
+  namespace: default
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: fastapi
+  type: LoadBalancer

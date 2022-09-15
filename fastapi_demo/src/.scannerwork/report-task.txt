@@ -1,0 +1,6 @@
+projectKey=devopstw22
+serverUrl=http://10.8.1.237:9000
+serverVersion=9.6.1.59531
+dashboardUrl=http://10.8.1.237:9000/dashboard?id=devopstw22
+ceTaskId=AYM4E0kPGn4M5mBOmBTy
+ceTaskUrl=http://10.8.1.237:9000/api/ce/task?id=AYM4E0kPGn4M5mBOmBTy

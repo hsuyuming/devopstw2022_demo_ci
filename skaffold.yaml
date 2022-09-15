@@ -1,0 +1,171 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+profiles:
+  - name: all_docker_example
+    build:
+      artifacts:
+      - image: fastapi_demo
+        context: fastapi_demo
+        docker:
+          dockerfile: Dockerfile
+      local: 
+          push: false
+    deploy:
+      docker:
+        images: [fastapi_demo]
+    portForward:
+    - resourceType: Container
+      resourceName: fastapi_demo
+      port: 8081
+      address: 0.0.0.0
+      localPort: 32776
+  - name: docker_with_kubectl_local
+    build:
+      tagPolicy:
+        gitCommit: {}
+      artifacts:
+      - image: fastapi_demo
+        context: fastapi_demo
+        docker:
+          dockerfile: Dockerfile
+      local: 
+          push: false
+    test:
+      - image: fastapi_demo
+        custom:
+          - command: ./fastapi_demo/bin/test
+            timeoutSeconds: 3600
+    deploy:
+      kubectl:
+        manifests:
+          - fastapi_demo/kubernetest_manifests_local/*
+  - name: docker_with_kubectl_artifactory_envtag
+    build:
+      tagPolicy:
+        envTemplate:
+          template: "{{.IMAGE_TAG}}"
+      artifacts:
+      - image: docker.io/devopstw22/fastapi_demo
+        context: fastapi_demo
+        docker:
+          dockerfile: Dockerfile
+      local: 
+          push: true
+    test:
+      - image: docker.io/devopstw22/fastapi_demo
+        custom:
+          - command: ./fastapi_demo/bin/test
+            timeoutSeconds: 3600
+    deploy:
+      kubectl:
+        manifests:
+          - fastapi_demo/kubernetest_manifests_artifactory/*
+  - name: docker_with_kubectl_artifactory
+    build:
+      tagPolicy:
+        gitCommit: 
+          variant: CommitSha
+          ignoreChanges: true
+      artifacts:
+      - image: docker.io/devopstw22/fastapi_demo
+        context: fastapi_demo
+        docker:
+          dockerfile: Dockerfile
+      local: 
+          push: true
+    test:
+      - image: docker.io/devopstw22/fastapi_demo
+        custom:
+          - command: ./fastapi_demo/bin/test
+            timeoutSeconds: 3600
+    deploy:
+      kubectl:
+        manifests:
+          - fastapi_demo/kubernetest_manifests_artifactory/*
+  - name: docker_with_local_helm_chart
+    build:
+      tagPolicy:
+        gitCommit: 
+          variant: CommitSha
+          ignoreChanges: true
+      artifacts:
+      - image: docker.io/devopstw22/fastapi_demo
+        context: fastapi_demo
+        docker:
+          dockerfile: Dockerfile
+      local: 
+          push: true
+    test:
+      - image: docker.io/devopstw22/fastapi_demo
+        custom:
+          - command: ./fastapi_demo/bin/test
+            timeoutSeconds: 3600
+    deploy:
+      helm:
+        releases:
+          - name: fastapi-helm
+            artifactOverrides:
+                # This key will mapping with Values.<key>.<repository>
+                image: docker.io/devopstw22/fastapi_demo # no tag present!
+            chartPath: fastapi_demo/helm_charts
+            valuesFiles: ["fastapi_demo/helm_charts/values.yaml"]
+            imageStrategy:
+              helm: {}
+            recreatePods: false
+            skipBuildDependencies: false
+            useHelmSecrets: false
+            wait: false
+      statusCheck: true
+      statusCheckDeadlineSeconds: 600
+  - name: docker_with_remote_helm_chart
+    build:
+      tagPolicy:
+        gitCommit: 
+          variant: CommitSha
+          ignoreChanges: true
+      artifacts:
+      - image: docker.io/devopstw22/fastapi_demo
+        context: fastapi_demo
+        docker:
+          dockerfile: Dockerfile
+      local: 
+          push: true
+    test:
+      - image: docker.io/devopstw22/fastapi_demo
+        custom:
+          - command: ./fastapi_demo/bin/test
+            timeoutSeconds: 3600
+    deploy:
+      helm:
+        releases:
+          - name: fastapi-helm
+            artifactOverrides:
+                # This key will mapping with Values.<key>.<repository>
+                image: docker.io/devopstw22/fastapi_demo # no tag present!
+            remoteChart: oci://docker.io/devopstw22/skaffold-helm-fastapi
+            valuesFiles: ["fastapi_demo/helm_charts/values.yaml"]
+            imageStrategy:
+              helm: {}
+            recreatePods: false
+            upgradeOnChange: true
+            skipBuildDependencies: false
+            useHelmSecrets: false
+            createNamespace: false
+            wait: false
+        flags:
+          upgrade:
+            - --install
+      statusCheck: true
+      statusCheckDeadlineSeconds: 600
+  - name: demo_ci
+    build:
+      tagPolicy:
+        envTemplate:
+          template: "{{.IMAGE_TAG}}"
+      artifacts:
+      - image: docker.io/devopstw22/fastapi_demo
+        context: fastapi_demo
+        docker:
+          dockerfile: Dockerfile
+      local: 
+          push: true

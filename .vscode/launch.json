@@ -1,0 +1,96 @@
+{
+    "configurations": [
+        {
+            "name": "Kubernetes: Run/Debug - all_docker_example",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "profile": "all_docker_example",
+            "watch": true,
+            "cleanUp": true,
+            "portForward": true
+        },
+        {
+            "name": "Kubernetes: Run/Debug - docker_with_kubectl_local",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "profile": "docker_with_kubectl_local",
+            "watch": true,
+            "cleanUp": true,
+            "portForward": true,
+            "debug": [
+                {
+                    "image": "fastapi_demo",
+                    "containerName": "fastapi",
+                    "sourceFileMap": {
+                        "${workspaceFolder}/fastapi_demo": "/code"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Kubernetes: Run/Debug - docker_with_kubectl_artifactory",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "profile": "docker_with_kubectl_artifactory",
+            "watch": true,
+            "cleanUp": true,
+            "portForward": true,
+            "debug": [
+                {
+                    "image": "fastapi_demo",
+                    "containerName": "fastapi",
+                    "sourceFileMap": {
+                        "${workspaceFolder}/fastapi_demo": "/code"
+                    }
+                }
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "imageRegistry": "docker.io/devopstw22"
+        },
+        {
+            "name": "Kubernetes: Run/Debug - docker_with_local_helm_chart",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "profile": "docker_with_local_helm_chart",
+            "watch": true,
+            "cleanUp": true,
+            "portForward": true,
+            "debug": [
+                {
+                    "image": "fastapi_demo",
+                    "containerName": "fastapi",
+                    "sourceFileMap": {
+                        "${workspaceFolder}/fastapi_demo": "/code"
+                    }
+                }
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "imageRegistry": "docker.io/devopstw22"
+        },
+        {
+            "name": "Kubernetes: Run/Debug - docker_with_remote_helm_chart",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "profile": "docker_with_remote_helm_chart",
+            "watch": true,
+            "cleanUp": true,
+            "portForward": true,
+            "debug": [
+                {
+                    "image": "fastapi_demo",
+                    "containerName": "fastapi",
+                    "sourceFileMap": {
+                        "${workspaceFolder}/fastapi_demo": "/code"
+                    }
+                }
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "imageRegistry": "docker.io/devopstw22"
+        }
+    ]
+}

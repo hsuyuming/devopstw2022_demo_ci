@@ -1,0 +1,4 @@
+image:
+  repository: gcr.io/my-project/my-image
+  tag: v1.2.0
+  pullPolicy: Always

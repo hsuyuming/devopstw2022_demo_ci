@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+echo $IMAGE
+
+docker run --rm $IMAGE pytest -v tests/

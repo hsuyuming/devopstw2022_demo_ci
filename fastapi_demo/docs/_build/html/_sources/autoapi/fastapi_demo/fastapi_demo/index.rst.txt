@@ -1,0 +1,68 @@
+:py:mod:`fastapi_demo.fastapi_demo`
+===================================
+
+.. py:module:: fastapi_demo.fastapi_demo
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   fastapi_demo.fastapi_demo.hello_student
+   fastapi_demo.fastapi_demo.hello_devopstw
+   fastapi_demo.fastapi_demo.roll_call
+   fastapi_demo.fastapi_demo.ping
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   fastapi_demo.fastapi_demo.app
+   fastapi_demo.fastapi_demo.fake_data
+
+
+.. py:data:: app
+   
+
+   
+
+.. py:data:: fake_data
+   
+
+   
+
+.. py:function:: hello_student(student_id: int) -> str
+
+   get student name by id, then generate "Hello, <student_name>"
+
+   :param student_id: student's id.
+   :type student_id: id
+
+   :returns: concat Hello with student's name
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> hello_student(1)
+
+
+.. py:function:: hello_devopstw()
+   :async:
+
+
+.. py:function:: roll_call(student_id: int)
+   :async:
+
+
+.. py:function:: ping()
+   :async:
+
+

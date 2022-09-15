@@ -1,0 +1,85 @@
+(base) jupyter@abehsu-devops-demo:~/devopstw2022_demo$ skaffold build -p docker_with_kubectl_local --file-output tags.json -v debug 
+DEBU[0000] skaffold API not starting as it's not requested  subtask=-1 task=DevLoop
+INFO[0000] Skaffold &{Version:v1.39.2 ConfigVersion:skaffold/v2beta29 GitVersion: GitCommit:7ed1d722b53b55ac1c909f00d00a05b47d0964dd BuildDate:2022-08-16T14:29:11Z GoVersion:go1.17 Compiler:gc Platform:linux/amd64 User:}  subtask=-1 task=DevLoop
+INFO[0000] Loaded Skaffold defaults from "/home/jupyter/.skaffold/config"  subtask=-1 task=DevLoop
+DEBU[0000] config version out of date: upgrading to latest "skaffold/v2beta29"  subtask=-1 task=DevLoop
+DEBU[0000] parsed 1 configs from configuration file /home/jupyter/devopstw2022_demo/skaffold.yaml  subtask=-1 task=DevLoop
+INFO[0000] applying profile: docker_with_kubectl_local   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Build  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field artifacts  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field insecureRegistries  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field tagPolicy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field platforms  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field BuildType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Test   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Deploy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field DeployType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field docker  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field helm   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kpt    subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubectl  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kustomize  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheck  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheckDeadlineSeconds  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubeContext  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field logs   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field prefix  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field jsonParse  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field fields  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field PortForward  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field ResourceSelector  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field allow  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field deny   subtask=-1 task=DevLoop
+INFO[0000] no map entry found when attempting locate for &{fastapi_demo fastapi_demo <nil> {0xc0007ac580 <nil> <nil> <nil> <nil> <nil> <nil>} [] {[] []} []} of type *latest.Artifact and pointer: 824640271232  subtask=-1 task=DevLoop
+INFO[0000] Using kubectl context: minikube               subtask=-1 task=DevLoop
+DEBU[0000] getting client config for kubeContext: `minikube`  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [minikube version --output=json]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [{"commit":"62e108c3dfdec8029a890ad6d8ef96b6461426dc","minikubeVersion":"v1.26.1"}
+]  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [/home/jupyter/.cache/cloud-code/installer/google-cloud-sdk/bin/minikube docker-env --shell none -p minikube --user=skaffold]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [DOCKER_TLS_VERIFY=1
+DOCKER_HOST=tcp://192.168.49.2:2376
+DOCKER_CERT_PATH=/home/jupyter/.minikube/certs
+MINIKUBE_ACTIVE_DOCKERD=minikube
+]  subtask=-1 task=DevLoop
+DEBU[0000] setting Docker user agent to skaffold-v1.39.2  subtask=-1 task=DevLoop
+INFO[0000] Using minikube docker daemon at tcp://192.168.49.2:2376  subtask=-1 task=DevLoop
+DEBU[0000] CLI platforms provided: ""                    subtask=-1 task=DevLoop
+DEBU[0000] platforms detected from active kubernetes cluster nodes: ""  subtask=-1 task=DevLoop
+DEBU[0000] platforms selected for artifact "fastapi_demo": ""  subtask=-1 task=DevLoop
+DEBU[0000] Using builder: local                          subtask=-1 task=DevLoop
+INFO[0000] build concurrency first set to 1 parsed from *local.Builder[0]  subtask=-1 task=DevLoop
+INFO[0000] final build concurrency value is 1            subtask=-1 task=DevLoop
+Generating tags...
+ - fastapi_demo -> DEBU[0000] Running command: [git describe --tags --always]  subtask=-1 task=Build
+DEBU[0000] Command output: [2b10162
+]                    subtask=-1 task=Build
+DEBU[0000] Running command: [git status . --porcelain]   subtask=-1 task=Build
+DEBU[0000] Command output: [ D fastapi_demo/kubernetest_manifests/deployment.yaml
+ D fastapi_demo/kubernetest_manifests/service.yaml
+ M fastapi_demo/poetry.lock
+ M fastapi_demo/pyproject.toml
+ M fastapi_demo/src/fastapi_demo/__init__.py
+ M fastapi_demo/src/fastapi_demo/fastapi_demo.py
+ M fastapi_demo/tests/test_fastapi_demo.py
+?? fastapi_demo/kubernetest_manifests_artifactory/
+?? fastapi_demo/kubernetest_manifests_local/
+?? fastapi_demo/src/.scannerwork/
+?? fastapi_demo/src/__init__.py
+?? fastapi_demo/tests/__init__.py
+]  subtask=-1 task=Build
+fastapi_demo:2b10162-dirty
+INFO[0000] Tags generated in 7.055674ms                  subtask=-1 task=Build
+Checking cache...
+DEBU[0000] Found dependencies for dockerfile: [{pyproject.toml /code true 5 5} {poetry.lock /code true 5 5} {. /code false 17 17}]  subtask=-1 task=DevLoop
+ - fastapi_demo: Found. Tagging
+INFO[0000] Cache check completed in 48.259762ms          subtask=-1 task=Build
+
+DEBU[0000] exporting metrics                             subtask=-1 task=DevLoop
+DEBU[0000] error uploading metrics: rpc error: code = PermissionDenied desc = Request is prohibited by organization's policy. vpcServiceControlsUniqueIdentifier: 8oTTQx7wTRE6IpkG3n9yFON75fCIqum1R9-ASANh_7jfBEDpn8pqVQ
+error details: name = ErrorInfo reason = SECURITY_POLICY_VIOLATED domain = googleapis.com metadata = map[consumer:projects/1068938063531 service:monitoring.googleapis.com uid:8oTTQx7wTRE6IpkG3n9yFON75fCIqum1R9-ASANh_7jfBEDpn8pqVQ]
+error details: name = PreconditionFailure type = VPC_SERVICE_CONTROLS subj =  desc = 8oTTQx7wTRE6IpkG3n9yFON75fCIqum1R9-ASANh_7jfBEDpn8pqVQ  subtask=-1 task=DevLoop
+DEBU[0000] writing to file /home/jupyter/.skaffold/metrics instead  subtask=-1 task=DevLoop
+
+
+{"builds":[{"imageName":"fastapi_demo","tag":"fastapi_demo:b28c46ec4f6579f22e17fac45a9c0a5530c4db974b4443a240e8a07427a4d284"}]}

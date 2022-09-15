@@ -1,0 +1,123 @@
+# [START cloudbuild integration]
+steps:
+  - id: 'skaffold Build Image'
+    name: 'gcr.io/k8s-skaffold/skaffold:v1.37.2'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        skaffold build -p demo_ci --tag latest  -v debug --push=false
+  
+  - id: 'Run pylint & Unit Tests'
+    name: 'us-west1-docker.pkg.dev/${PROJECT_ID}/devopstw22/fastapi_demo:latest'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        echo "============Running Pylint================="
+        pylint `find ./fastapi_demo/src/fastapi_demo -name "*.py"`  || exit 1
+        echo "============Finish Pylint================="
+        APPROOT=. pytest -v --cov=fastapi_demo/src --cov-report=xml fastapi_demo/tests/
+
+  - id: 'Sonarqube Code Analytics'
+    name: 'sonarsource/sonar-scanner-cli'
+    env: 
+    - 'SONAR_HOST_URL=${_SONAR_HOST_URL}'
+    - 'SONAR_PROJECT=${_SONARQUBE_PROJECT}'
+    - 'SONAR_PROJECT_BASE_DIR=/workspace'
+    - 'SONAR_PYTHON_COVERAGE_REPORTPATHS=/workspace/coverage.xml'
+    - 'SONAR_TESTS_FOLDER=/workspace/fastapi_demo/tests'
+    - 'SONAR_SOURCES_FOLDER=/workspace/fastapi_demo/src'
+    entrypoint: bash
+    secretEnv: ['SONAR_TOKEN']
+    args:
+      - -c
+      - |
+        ls -la 
+        sonar-scanner -Dsonar.host.url=$$SONAR_HOST_URL -Dsonar.login=$$SONAR_TOKEN -Dsonar.projectKey=$$SONAR_PROJECT -Dsonar.sourceEndoding='UFT-8' -Dsonar.python.coverage.reportPaths=$$SONAR_PYTHON_COVERAGE_REPORTPATHS -Dsonar.projectBaseDir=$$SONAR_PROJECT_BASE_DIR -Dsonar.tests=$$SONAR_TESTS_FOLDER -Dsonar.sources=$$SONAR_SOURCES_FOLDER -X
+  
+  - id: 'Get version'
+    name: 'us-west1-docker.pkg.dev/${PROJECT_ID}/devopstw22/fastapi_demo:latest'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        python ./fastapi_demo/src/fastapi_demo/__init__.py > version.txt
+
+  - id: 'skaffold retag image and push'
+    name: 'gcr.io/k8s-skaffold/skaffold:v1.37.2'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        export IMAGE_TAG=`cat version.txt`
+        skaffold build -p demo_ci --file-output tags.json -v debug
+        cat tags.json
+
+  # This step clones the CD repository
+  - id: 'clone CD repository'
+    name: 'gcr.io/cloud-builders/git'
+  #   secretEnv: ['SCM_SSH_SECRET']
+    entrypoint: /bin/bash
+    args:
+    - '-c'
+    - |
+      echo "clone CD repository"
+  #     # https://stackoverflow.com/questions/46253162/add-ssh-key-from-variable
+  #     echo "starting ssh adgent..."
+  #     eval `ssh-agent -s` || exit 1
+  #     echo "Adding key from secret manager..."
+  #     eval $(ssh-agent)
+  #     echo "$$SCM_SSH_SECRET" | tr -d '\r'  | ssh-add - || exit 1
+  #     mkdir -p /root/.ssh
+  #     chmod -R 700  /root/.ssh
+  #     echo "Add/Update /root/.ssh/known_hosts..."
+  #     ssh-keyscan -H "$_SCM_HOST_URL" >> /root/.ssh/known_hosts || exit 1
+  #     echo "y" | git clone -b ${_DELIVERY_REPO_BRANCH} --depth 1 '$_DELIVERY_REPO' || exit 1
+
+
+  # This step pushes the tag file back to CD bitbucket repo
+  - id: copy tag file and push to CD repo
+    name: 'gcr.io/cloud-builders/git'
+    entrypoint: /bin/bash
+  #   secretEnv: ['SCM_SSH_SECRET']
+    args:
+    - '-c'
+    - |
+      echo "copy tags.json into CD repo"
+  #     cp ./tags.json ./devopstw2022_demo_cd_pipeline
+  #     echo "starting ssh adgent..." && \
+  #     eval `ssh-agent -s` || exit 1 && \
+  #     echo "Adding key from secret manager..." && \
+  #     eval $(ssh-agent) && \
+  #     echo "$$SCM_SSH_SECRET" | tr -d '\r'  | ssh-add - || exit 1 && \
+  #     mkdir -p /root/.ssh && \
+  #     chmod -R 700  /root/.ssh && \
+  #     echo "Add/Update /root/.ssh/known_hosts..." && \
+  #     ssh-keyscan -H "$_SCM_HOST_URL" >> /root/.ssh/known_hosts || exit 1 && \
+  #     git config --global user.email "demo@xxx.com" && \
+  #     git config --global user.name "demo"  && \
+  #     cd devopstw2022_demo_cd_pipeline && \
+  #     git add . && \
+  #     git commit -m " $(cat tags.json)
+  #     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
+  #     git push origin ${_DELIVERY_REPO_BRANCH}
+  
+timeout: 1800s
+
+substitutions:
+  # _DELIVERY_REPO: 'ssh://git@<repo>.git'
+  # _DELIVERY_REPO_BRANCH: 'master'
+  # _SCM_HOST_URL: '<url>'
+  _SONAR_HOST_URL: 'http://10.8.1.237:9000'
+  _SONARQUBE_PROJECT: devopstw22
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/$PROJECT_NUMBER/secrets/SONAR_TOKEN/versions/latest
+    env: SONAR_TOKEN
+  # - versionName: projects/$PROJECT_NUMBER/secrets/SCM_SSH_SECRET/versions/latest
+  #   env: SCM_SSH_SECRET
+
+
+serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/shared-service-account@$PROJECT_ID.iam.gserviceaccount.com'

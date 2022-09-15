@@ -1,0 +1,76 @@
+(base) jupyter@abehsu-devops-demo:~/devopstw2022_demo$ skaffold test -p docker_with_kubectl_artifactory_envtag  --build-artifacts=tags.json -v debug
+DEBU[0000] skaffold API not starting as it's not requested  subtask=-1 task=DevLoop
+INFO[0000] Skaffold &{Version:v1.39.2 ConfigVersion:skaffold/v2beta29 GitVersion: GitCommit:7ed1d722b53b55ac1c909f00d00a05b47d0964dd BuildDate:2022-08-16T14:29:11Z GoVersion:go1.17 Compiler:gc Platform:linux/amd64 User:}  subtask=-1 task=DevLoop
+INFO[0000] Loaded Skaffold defaults from "/home/jupyter/.skaffold/config"  subtask=-1 task=DevLoop
+DEBU[0000] config version out of date: upgrading to latest "skaffold/v2beta29"  subtask=-1 task=DevLoop
+DEBU[0000] parsed 1 configs from configuration file /home/jupyter/devopstw2022_demo/skaffold.yaml  subtask=-1 task=DevLoop
+INFO[0000] applying profile: docker_with_kubectl_artifactory_envtag  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Build  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field artifacts  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field insecureRegistries  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field tagPolicy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field platforms  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field BuildType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Test   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Deploy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field DeployType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field docker  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field helm   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kpt    subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubectl  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kustomize  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheck  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheckDeadlineSeconds  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubeContext  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field logs   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field prefix  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field jsonParse  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field fields  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field PortForward  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field ResourceSelector  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field allow  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field deny   subtask=-1 task=DevLoop
+INFO[0000] map entry found when executing locate for &{docker.io/devopstw22/fastapi_demo fastapi_demo <nil> {0xc00095a6e0 <nil> <nil> <nil> <nil> <nil> <nil>} [] {[] []} []} of type *latest.Artifact and pointer: 824640813056  subtask=-1 task=DevLoop
+INFO[0000] Using kubectl context: minikube               subtask=-1 task=DevLoop
+DEBU[0000] getting client config for kubeContext: `minikube`  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [minikube version --output=json]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [{"commit":"62e108c3dfdec8029a890ad6d8ef96b6461426dc","minikubeVersion":"v1.26.1"}
+]  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [/home/jupyter/.cache/cloud-code/installer/google-cloud-sdk/bin/minikube docker-env --shell none -p minikube --user=skaffold]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [DOCKER_TLS_VERIFY=1
+DOCKER_HOST=tcp://192.168.49.2:2376
+DOCKER_CERT_PATH=/home/jupyter/.minikube/certs
+MINIKUBE_ACTIVE_DOCKERD=minikube
+]  subtask=-1 task=DevLoop
+DEBU[0000] setting Docker user agent to skaffold-v1.39.2  subtask=-1 task=DevLoop
+INFO[0000] Using minikube docker daemon at tcp://192.168.49.2:2376  subtask=-1 task=DevLoop
+DEBU[0000] CLI platforms provided: ""                    subtask=-1 task=DevLoop
+DEBU[0000] platforms detected from active kubernetes cluster nodes: ""  subtask=-1 task=DevLoop
+DEBU[0000] platforms selected for artifact "docker.io/devopstw22/fastapi_demo": ""  subtask=-1 task=DevLoop
+DEBU[0000] Using builder: local                          subtask=-1 task=DevLoop
+INFO[0000] build concurrency first set to 1 parsed from *local.Builder[0]  subtask=-1 task=DevLoop
+INFO[0000] final build concurrency value is 1            subtask=-1 task=DevLoop
+Starting test...
+Testing images...
+DEBU[0000] Executing template &{envTemplate 0xc00043c360 0xc0002f1590  } with environment map[BINARIES_PATH:/opt/deeplearning/binaries BROWSER:/home/jupyter/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/bin/helpers/browser.sh COLORTERM:truecolor CONDA_DEFAULT_ENV:base CONDA_EXE:/opt/conda/bin/conda CONDA_PREFIX:/opt/conda CONDA_PROMPT_MODIFIER:(base)  CONDA_PYTHON_EXE:/opt/conda/bin/python CONDA_SHLVL:1 DBUS_SESSION_BUS_ADDRESS:unix:path=/run/user/1000/bus DL_ANACONDA_HOME:/opt/conda DL_BIN_PATH:/opt/deeplearning/bin DL_METADATA_PATH:/opt/deeplearning/metadata DL_PATH:/opt/deeplearning DL_PATH_DEPS:/opt/deeplearning/deps ENV_URI_FILE_PATH:/opt/deeplearning/metadata/env_uri ENV_VERSION_FILE_PATH:/opt/deeplearning/metadata/env_version FRAMEWORK_FILE_PATH:/opt/deeplearning/metadata/framework GIT_ASKPASS:/home/jupyter/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/extensions/git/dist/askpass.sh GRPC_FORK_SUPPORT_ENABLED:0 HOME:/home/jupyter IMAGE_TAG:0.1.0 JUPYTER_DEPS_PATH:/opt/deeplearning/jupyter LANG:C.UTF-8 LIT_PROXY_URL:/proxy/%PORT%/ LOGNAME:jupyter MAIL:/var/mail/jupyter MOUNTS_ON_ALL_CONTAINERS:/usr/local/share/ca-certificates,/etc/ssl/certs,/etc/ca-certificates/update.d OPAL_PREFIX:/usr OS_DEBIAN10:debian-10 OS_DEBIAN_PROJECT:debian-cloud OS_IMAGE_FAMILY:debian-10 OS_IMAGE_PROJECT:debian-cloud OS_UBUNTU2004:ubuntu-2004-lts PACKAGE_SOURCE_CODE_PATH:/opt/deeplearning/src/third_party PATH:/home/jupyter/.cache/cloud-code/installer/google-cloud-sdk/bin:/home/jupyter/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/bin/remote-cli:/opt/conda/bin:/opt/conda/condabin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games POST_STARTUP_SCRIPT_PATH:/opt/c2d/post_start.sh PWD:/home/jupyter/devopstw2022_demo RESTRICTION_TYPE_FILE_PATH:/opt/deeplearning/restriction SHELL:/bin/bash SHLVL:2 SRC_PATH:/opt/deeplearning/src SSH_CLIENT:10.6.150.132 61415 22 SSH_CONNECTION:10.6.150.132 61415 10.8.1.237 22 TENSORBOARD_PROXY_URL:/proxy/%PORT%/ TERM:xterm-256color TERM_PROGRAM:vscode TERM_PROGRAM_VERSION:1.70.2 TITLE_FILE_PATH:/opt/deeplearning/metadata/title TUTORIALS_PATH:/opt/deeplearning/workspace/tutorials USER:jupyter VERSION_FILE_PATH:/opt/deeplearning/metadata/version VSCODE_GIT_ASKPASS_EXTRA_ARGS: VSCODE_GIT_ASKPASS_MAIN:/home/jupyter/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/extensions/git/dist/askpass-main.js VSCODE_GIT_ASKPASS_NODE:/home/jupyter/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node VSCODE_GIT_IPC_HANDLE:/run/user/1000/vscode-git-f9fd202419.sock VSCODE_IPC_HOOK_CLI:/run/user/1000/vscode-ipc-a80b5ce9-706f-4bf1-8f12-e5386fafff32.sock WORKSPACE_PATH:/opt/deeplearning/workspace XDG_RUNTIME_DIR:/run/user/1000 XDG_SESSION_CLASS:user XDG_SESSION_ID:1 XDG_SESSION_TYPE:tty _:/home/jupyter/.cache/cloud-code/installer/google-cloud-sdk/bin/skaffold _CE_CONDA: _CE_M:]  subtask=-1 task=DevLoop
+Running custom test command: "./fastapi_demo/bin/test" with timeout 3600 s
+DEBU[0000] Running command: [sh -c ./fastapi_demo/bin/test]  subtask=-1 task=Test
+docker.io/devopstw22/fastapi_demo:0a08c522cb0dfe0cfbbc7c2416397767c50dc20e996293547a453d22d9bf6597
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-7.1.3, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /code
+plugins: anyio-3.6.1, cov-3.0.0
+collecting ... collected 1 item
+
+tests/test_fastapi_demo.py::test_hello_student_expected_name PASSED      [100%]
+
+============================== 1 passed in 0.77s ===============================
+Command finished successfully.
+INFO[0003] Test completed in 2.61 seconds                subtask=-1 task=Test
+
+DEBU[0003] exporting metrics                             subtask=-1 task=DevLoop
+DEBU[0003] error uploading metrics: rpc error: code = PermissionDenied desc = Request is prohibited by organization's policy. vpcServiceControlsUniqueIdentifier: ZlpsLgsEZgtOQrzYeUGuSIxZSwCOblIhwBuPfQvcDi81KIA-iCRmFQ
+error details: name = ErrorInfo reason = SECURITY_POLICY_VIOLATED domain = googleapis.com metadata = map[consumer:projects/1068938063531 service:monitoring.googleapis.com uid:ZlpsLgsEZgtOQrzYeUGuSIxZSwCOblIhwBuPfQvcDi81KIA-iCRmFQ]
+error details: name = PreconditionFailure type = VPC_SERVICE_CONTROLS subj =  desc = ZlpsLgsEZgtOQrzYeUGuSIxZSwCOblIhwBuPfQvcDi81KIA-iCRmFQ  subtask=-1 task=DevLoop
+DEBU[0003] writing to file /home/jupyter/.skaffold/metrics instead  subtask=-1 task=DevLoop

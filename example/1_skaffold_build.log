@@ -1,0 +1,144 @@
+skaffold build -p docker_with_kubectl_local -v debug
+
+(base) jupyter@abehsu-devops-demo:~/devopstw2022_demo$ skaffold build -p docker_with_kubectl_local -v debug
+DEBU[0000] skaffold API not starting as it's not requested  subtask=-1 task=DevLoop
+INFO[0000] Skaffold &{Version:v1.39.2 ConfigVersion:skaffold/v2beta29 GitVersion: GitCommit:7ed1d722b53b55ac1c909f00d00a05b47d0964dd BuildDate:2022-08-16T14:29:11Z GoVersion:go1.17 Compiler:gc Platform:linux/amd64 User:}  subtask=-1 task=DevLoop
+INFO[0000] Loaded Skaffold defaults from "/home/jupyter/.skaffold/config"  subtask=-1 task=DevLoop
+DEBU[0000] config version out of date: upgrading to latest "skaffold/v2beta29"  subtask=-1 task=DevLoop
+DEBU[0000] parsed 1 configs from configuration file /home/jupyter/devopstw2022_demo/skaffold.yaml  subtask=-1 task=DevLoop
+INFO[0000] applying profile: docker_with_kubectl_local   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Build  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field artifacts  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field insecureRegistries  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field tagPolicy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field platforms  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field BuildType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Test   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field Deploy  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field DeployType  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field docker  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field helm   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kpt    subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubectl  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kustomize  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheck  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field statusCheckDeadlineSeconds  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field kubeContext  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field logs   subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field prefix  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field jsonParse  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field fields  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field PortForward  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field ResourceSelector  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field allow  subtask=-1 task=DevLoop
+DEBU[0000] overlaying profile on config for field deny   subtask=-1 task=DevLoop
+INFO[0000] no map entry found when attempting locate for &{fastapi_demo fastapi_demo <nil> {0xc0006e29a0 <nil> <nil> <nil> <nil> <nil> <nil>} [] {[] []} []} of type *latest.Artifact and pointer: 824641844672  subtask=-1 task=DevLoop
+INFO[0000] Using kubectl context: minikube               subtask=-1 task=DevLoop
+DEBU[0000] getting client config for kubeContext: `minikube`  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [minikube version --output=json]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [{"commit":"62e108c3dfdec8029a890ad6d8ef96b6461426dc","minikubeVersion":"v1.26.1"}
+]  subtask=-1 task=DevLoop
+DEBU[0000] Running command: [/home/jupyter/.cache/cloud-code/installer/google-cloud-sdk/bin/minikube docker-env --shell none -p minikube --user=skaffold]  subtask=-1 task=DevLoop
+DEBU[0000] Command output: [DOCKER_TLS_VERIFY=1
+DOCKER_HOST=tcp://192.168.49.2:2376
+DOCKER_CERT_PATH=/home/jupyter/.minikube/certs
+MINIKUBE_ACTIVE_DOCKERD=minikube
+]  subtask=-1 task=DevLoop
+DEBU[0000] setting Docker user agent to skaffold-v1.39.2  subtask=-1 task=DevLoop
+INFO[0000] Using minikube docker daemon at tcp://192.168.49.2:2376  subtask=-1 task=DevLoop
+DEBU[0000] CLI platforms provided: ""                    subtask=-1 task=DevLoop
+DEBU[0000] platforms detected from active kubernetes cluster nodes: ""  subtask=-1 task=DevLoop
+DEBU[0000] platforms selected for artifact "fastapi_demo": ""  subtask=-1 task=DevLoop
+DEBU[0000] Using builder: local                          subtask=-1 task=DevLoop
+INFO[0000] build concurrency first set to 1 parsed from *local.Builder[0]  subtask=-1 task=DevLoop
+INFO[0000] final build concurrency value is 1            subtask=-1 task=DevLoop
+Generating tags...
+ - fastapi_demo -> DEBU[0000] Running command: [git describe --tags --always]  subtask=-1 task=Build
+DEBU[0000] Command output: [2b10162
+]                    subtask=-1 task=Build
+DEBU[0000] Running command: [git status . --porcelain]   subtask=-1 task=Build
+DEBU[0000] Command output: [ D fastapi_demo/kubernetest_manifests/deployment.yaml
+ D fastapi_demo/kubernetest_manifests/service.yaml
+ M fastapi_demo/poetry.lock
+ M fastapi_demo/pyproject.toml
+ M fastapi_demo/src/fastapi_demo/__init__.py
+ M fastapi_demo/src/fastapi_demo/fastapi_demo.py
+ M fastapi_demo/tests/test_fastapi_demo.py
+?? fastapi_demo/kubernetest_manifests_artifactory/
+?? fastapi_demo/kubernetest_manifests_local/
+?? fastapi_demo/src/.scannerwork/
+?? fastapi_demo/src/__init__.py
+?? fastapi_demo/tests/__init__.py
+]  subtask=-1 task=Build
+fastapi_demo:2b10162-dirty
+INFO[0000] Tags generated in 10.403429ms                 subtask=-1 task=Build
+Checking cache...
+DEBU[0000] Found dependencies for dockerfile: [{pyproject.toml /code true 5 5} {poetry.lock /code true 5 5} {. /code false 17 17}]  subtask=-1 task=DevLoop
+DEBU[0000] Could not import artifact from Docker, building instead (import of missing images disabled)  subtask=-1 task=Build
+ - fastapi_demo: Not found. Building
+INFO[0000] Cache check completed in 26.590408ms          subtask=-1 task=Build
+Starting build...
+Found [minikube] context, using local docker daemon.
+Building [fastapi_demo]...
+DEBU[0000] Running docker build: context: fastapi_demo, dockerfile: Dockerfile  subtask=fastapi_demo task=Build
+Sending build context to Docker daemon  4.667MB
+Step 1/9 : FROM python:3.9.10
+ ---> 716d7c7b7a80
+Step 2/9 : WORKDIR /code
+ ---> Using cache
+ ---> 4c655f73b821
+Step 3/9 : COPY ./pyproject.toml ./poetry.lock /code/
+ ---> Using cache
+ ---> 061516355511
+Step 4/9 : RUN apt-get update &&     apt-get -y upgrade &&     apt-get -y --allow-downgrades install lsb-release unixodbc unixodbc-dev freetds-dev freetds-bin tdsodbc libldap-2.4-2 zip unzip libpng-dev libaio1 libbz2-dev netcat vim
+ ---> Using cache
+ ---> b861f4d16211
+Step 5/9 : RUN pip install --upgrade pip  &&     pip install --no-cache-dir poetry &&     poetry config virtualenvs.create false &&     poetry install --no-interaction --no-ansi
+ ---> Using cache
+ ---> bf30c6b43df4
+Step 6/9 : COPY . /code
+ ---> fe1457f0c2c1
+Step 7/9 : RUN poetry build &&     pip install dist/*.whl
+ ---> Running in 4dcdc481b798
+Skipping virtualenv creation, as specified in config file.
+Building fastapi_demo (0.1.0)
+  - Building sdist
+  - Built fastapi_demo-0.1.0.tar.gz
+  - Building wheel
+  - Built fastapi_demo-0.1.0-py3-none-any.whl
+Processing ./dist/fastapi_demo-0.1.0-py3-none-any.whl
+Requirement already satisfied: uvicorn<0.19.0,>=0.18.3 in /usr/local/lib/python3.9/site-packages (from fastapi-demo==0.1.0) (0.18.3)
+Requirement already satisfied: fastapi<0.84.0,>=0.83.0 in /usr/local/lib/python3.9/site-packages (from fastapi-demo==0.1.0) (0.83.0)
+Requirement already satisfied: pandas<2.0.0,>=1.4.4 in /usr/local/lib/python3.9/site-packages (from fastapi-demo==0.1.0) (1.4.4)
+Requirement already satisfied: pydantic<2.0.0,>=1.10.2 in /usr/local/lib/python3.9/site-packages (from fastapi-demo==0.1.0) (1.10.2)
+Requirement already satisfied: starlette==0.19.1 in /usr/local/lib/python3.9/site-packages (from fastapi<0.84.0,>=0.83.0->fastapi-demo==0.1.0) (0.19.1)
+Requirement already satisfied: anyio<5,>=3.4.0 in /usr/local/lib/python3.9/site-packages (from starlette==0.19.1->fastapi<0.84.0,>=0.83.0->fastapi-demo==0.1.0) (3.6.1)
+Requirement already satisfied: typing-extensions>=3.10.0 in /usr/local/lib/python3.9/site-packages (from starlette==0.19.1->fastapi<0.84.0,>=0.83.0->fastapi-demo==0.1.0) (4.3.0)
+Requirement already satisfied: python-dateutil>=2.8.1 in /usr/local/lib/python3.9/site-packages (from pandas<2.0.0,>=1.4.4->fastapi-demo==0.1.0) (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.9/site-packages (from pandas<2.0.0,>=1.4.4->fastapi-demo==0.1.0) (2022.2.1)
+Requirement already satisfied: numpy>=1.18.5 in /usr/local/lib/python3.9/site-packages (from pandas<2.0.0,>=1.4.4->fastapi-demo==0.1.0) (1.23.3)
+Requirement already satisfied: h11>=0.8 in /usr/local/lib/python3.9/site-packages (from uvicorn<0.19.0,>=0.18.3->fastapi-demo==0.1.0) (0.13.0)
+Requirement already satisfied: click>=7.0 in /usr/local/lib/python3.9/site-packages (from uvicorn<0.19.0,>=0.18.3->fastapi-demo==0.1.0) (8.1.3)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.9/site-packages (from python-dateutil>=2.8.1->pandas<2.0.0,>=1.4.4->fastapi-demo==0.1.0) (1.16.0)
+Requirement already satisfied: idna>=2.8 in /usr/local/lib/python3.9/site-packages (from anyio<5,>=3.4.0->starlette==0.19.1->fastapi<0.84.0,>=0.83.0->fastapi-demo==0.1.0) (3.3)
+Requirement already satisfied: sniffio>=1.1 in /usr/local/lib/python3.9/site-packages (from anyio<5,>=3.4.0->starlette==0.19.1->fastapi<0.84.0,>=0.83.0->fastapi-demo==0.1.0) (1.3.0)
+Installing collected packages: fastapi-demo
+Successfully installed fastapi-demo-0.1.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+ ---> e4818b675fdf
+Step 8/9 : EXPOSE 8081
+ ---> Running in 6e914cfca63c
+ ---> 70de00a778e8
+Step 9/9 : CMD ["python", "-m", "uvicorn", "src.fastapi_demo.fastapi_demo:app", "--host", "0.0.0.0", "--port", "8081"]
+ ---> Running in 00a79c0a37b3
+ ---> b28c46ec4f65
+Successfully built b28c46ec4f65
+Successfully tagged fastapi_demo:2b10162-dirty
+Build [fastapi_demo] succeeded
+INFO[0015] Build completed in 14.836 seconds             subtask=-1 task=Build
+
+DEBU[0015] exporting metrics                             subtask=-1 task=DevLoop
+DEBU[0015] error uploading metrics: rpc error: code = PermissionDenied desc = Request is prohibited by organization's policy. vpcServiceControlsUniqueIdentifier: F9NL9FF2G0QmVsTCjHdEyXsTRFHzdx0y4I6WbdiQBJfRa0DYGgfebA
+error details: name = ErrorInfo reason = SECURITY_POLICY_VIOLATED domain = googleapis.com metadata = map[consumer:projects/1068938063531 service:monitoring.googleapis.com uid:F9NL9FF2G0QmVsTCjHdEyXsTRFHzdx0y4I6WbdiQBJfRa0DYGgfebA]
+error details: name = PreconditionFailure type = VPC_SERVICE_CONTROLS subj =  desc = F9NL9FF2G0QmVsTCjHdEyXsTRFHzdx0y4I6WbdiQBJfRa0DYGgfebA  subtask=-1 task=DevLoop
+DEBU[0015] writing to file /home/jupyter/.skaffold/metrics instead  subtask=-1 task=DevLoop

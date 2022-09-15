@@ -1,0 +1,15 @@
+:py:mod:`fastapi_demo`
+======================
+
+.. py:module:: fastapi_demo
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   fastapi_demo/index.rst
+
+

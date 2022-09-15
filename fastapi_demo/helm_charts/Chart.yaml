@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Skaffold fastapi example with Helm
+name: skaffold-helm-fastapi
+version: 0.0.1
